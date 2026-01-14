@@ -212,9 +212,13 @@ export interface PoiDataType extends MapPointLayerType {
 
 export const POI_DATA: PoiDataType = {
   id: 'poi-data',
-  tileset: {
+  /* tileset: {
     url: 'mapbox://technologiestiftung.8zk96hlq',
     layerName: 'pois_jun2025-bkayoz',
+  }, */
+  tileset: {
+    url: 'mapbox://laschfabian.cmkejhobh1dvz1nmnlqs1dv2x-3nowa',
+    layerName: 'WC-Daten_V2',
   },
   fillColorProperty: 'category',
   fillColorMap: POI_CATEGORY_COLOR_MAP,

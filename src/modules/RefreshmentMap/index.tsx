@@ -42,7 +42,14 @@ interface MapFeatureType {
   properties: {
     name?: string
     category?: string
-    info?: string
+    info?:
+      | string
+      | {
+          wc?: string
+          entry?: string
+          [key: string]: string | undefined
+        }
+    address?: string
   }
   [key: string]: unknown
 }
@@ -54,8 +61,8 @@ export const MAP_CONFIG = {
   minZoom: 11.5,
   maxZoom: 19,
   defaultZoom: 14,
-  defaultLatitude: 52.520952,
-  defaultLongitude: 13.400033,
+  defaultLatitude: 51.050055,
+  defaultLongitude: 13.73512,
 }
 
 export const RefreshmentMap: FC<RefreshmentMapPropType> = (pageProps) => {
@@ -74,7 +81,7 @@ export const RefreshmentMap: FC<RefreshmentMapPropType> = (pageProps) => {
   const hourKeys = Object.keys(HOURS) as HourType[]
   const [poiTooltipContent, setPoiTooltipContent] = useState<Pick<
     MapPoiTooltipType,
-    'title' | 'category' | 'info'
+    'title' | 'category' | 'info' | 'address'
   > | null>(null)
 
   const [poiTooltipCoordinates, setPoiTooltipCoordinates] = useState<{
@@ -95,6 +102,7 @@ export const RefreshmentMap: FC<RefreshmentMapPropType> = (pageProps) => {
       title: hoveredPoiFeatures[0].properties.name || '',
       category: hoveredPoiFeatures[0].properties.category || '',
       info: hoveredPoiFeatures[0].properties.info || '',
+      address: hoveredPoiFeatures[0].properties.address || '',
     })
 
     setPoiTooltipCoordinates({
@@ -187,6 +195,7 @@ export const RefreshmentMap: FC<RefreshmentMapPropType> = (pageProps) => {
               title={poiTooltipContent.title}
               category={poiTooltipContent.category}
               info={poiTooltipContent.info}
+              address={poiTooltipContent.address}
             />
           )}
       </MapRoot>
