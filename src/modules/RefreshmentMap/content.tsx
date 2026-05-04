@@ -158,7 +158,7 @@ export const EXTRUDED_BUILDINGS_DATA: MapExtrusionLayerType = {
 export type PoiCategory =
   | 'Sitzbank'
   | 'Picknicktisch'
-  | 'Gruenanlage'
+  | 'Grünanlage'
   | 'Trinkbrunnen'
   | 'Brunnen'
   | 'Refill Station'
@@ -179,7 +179,7 @@ export const POI_CATEGORY_COLOR_MAP: Map<PoiCategory, string> = new Map([
   ['Trinkbrunnen', colors['poi-lightblue']],
   ['Brunnen', colors['poi-turquoise']],
   ['Refill Station', colors['poi-lightblue']],
-  ['Gruenanlage', colors['poi-green']],
+  ['Grünanlage', colors['poi-green']],
   ['Sitzbank', colors['poi-yellow']],
   ['Picknicktisch', colors['poi-red']],
   ['Toilette', colors['poi-orange']],
@@ -196,7 +196,7 @@ export const POI_CATEGORY_ID_MAP: { [key in PoiCategory]: PoiCategoryId } = {
   Wasserspielplatz: 5,
   Trinkbrunnen: 6,
   Brunnen: 7,
-  Gruenanlage: 8,
+  Grünanlage: 8,
   Sitzbank: 9,
   Picknicktisch: 10,
   Toilette: 11,
@@ -231,7 +231,7 @@ export const POI_DATA: PoiDataType = {
     'Trinkbrunnen',
     'Brunnen',
     'Refill Station',
-    'Gruenanlage',
+    'Grünanlage',
     'Sitzbank',
     'Picknicktisch',
     'Toilette',
@@ -617,7 +617,7 @@ export const SEARCH_SUGGESTIONS: SearchSuggestionItemType[] = [
     properties: {
       name: 'Volkspark Prenzlauer Berg',
       conditions: 'kühl, viel Schatten',
-      category: 'Gruenanlage',
+      category: 'Grünanlage',
       bezirk: 'Pankow',
       bezirksreg: 'Prenzlauer Berg Ost',
     },
@@ -687,7 +687,7 @@ export const SEARCH_SUGGESTIONS: SearchSuggestionItemType[] = [
     properties: {
       name: 'Tempelhofer Feld',
       conditions: 'sonnig, abends kühl',
-      category: 'Gruenanlage',
+      category: 'Grünanlage',
       bezirk: 'Tempelhof-Schöneberg',
       bezirksreg: 'Tempelhof',
     },
@@ -701,7 +701,7 @@ export const SEARCH_SUGGESTIONS: SearchSuggestionItemType[] = [
     properties: {
       name: 'Pfaueninsel',
       conditions: 'frische Brise, viel Schatten',
-      category: 'Gruenanlage',
+      category: 'Grünanlage',
       bezirk: 'Steglitz-Zehlendorf',
       bezirksreg: 'Zehlendorf Südwest',
     },
@@ -715,7 +715,7 @@ export const SEARCH_SUGGESTIONS: SearchSuggestionItemType[] = [
     properties: {
       name: 'Freizeitpark Marienfelde',
       conditions: 'frische Brise, abends kühl',
-      category: 'Gruenanlage',
+      category: 'Grünanlage',
       bezirk: 'Tempelhof-Schöneberg',
       bezirksreg: 'Mariendorf',
     },
@@ -729,7 +729,7 @@ export const SEARCH_SUGGESTIONS: SearchSuggestionItemType[] = [
     properties: {
       name: 'Britzer Garten',
       conditions: 'vergleichsweise kühl',
-      category: 'Gruenanlage',
+      category: 'Grünanlage',
       bezirk: 'Neukölln',
       bezirksreg: 'Britz',
     },
