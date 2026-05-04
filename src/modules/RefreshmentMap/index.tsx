@@ -45,7 +45,7 @@ interface MapFeatureType {
     info?:
       | string
       | {
-          wc?: string
+          //wc?: string
           entry?: string
           [key: string]: string | undefined
         }
@@ -64,6 +64,18 @@ export const MAP_CONFIG = {
   defaultLatitude: 51.050055,
   defaultLongitude: 13.73512,
 }
+
+/**
+ * Mapbox style URL used by the app.
+ *
+ * Important: this project uses mapbox-gl@2.x via react-map-gl@6.x.
+ * Styles that include an "imports" field (Mapbox Standard v3) are not
+ * compatible and can trigger runtime errors.
+ *
+ * Use a classic/legacy style export from Mapbox Studio (no "imports").
+ */
+export const MAP_STYLE_URL =
+  'mapbox://styles/laschfabian/cmkg2i9nz000001qx6jy692my'
 
 export const RefreshmentMap: FC<RefreshmentMapPropType> = (pageProps) => {
   const hasMobileSize = useHasMobileSize()
@@ -132,7 +144,9 @@ export const RefreshmentMap: FC<RefreshmentMapPropType> = (pageProps) => {
       {(pathname === '/map' || pathname === '/social-image') && <AppTitle />}
       {pathname === '/' && <SplashScreen />}
       <MapRoot
-        mapStyle="mapbox://styles/mapbox/light-v10"
+        //mapStyle="mapbox://styles/mapbox/light-v10"
+
+        mapStyle={MAP_STYLE_URL}
         staticViewportProps={{
           minZoom: MAP_CONFIG.minZoom,
           maxZoom: MAP_CONFIG.maxZoom,

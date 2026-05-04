@@ -217,8 +217,8 @@ export const POI_DATA: PoiDataType = {
     layerName: 'pois_jun2025-bkayoz',
   }, */
   tileset: {
-    url: 'mapbox://laschfabian.cmkejhobh1dvz1nmnlqs1dv2x-3nowa',
-    layerName: 'WC-Daten_V2',
+    url: 'mapbox://laschfabian.cmkfzruau1q2c1omn821mde15-45vsv',
+    layerName: 'pois-dresden',
   },
   fillColorProperty: 'category',
   fillColorMap: POI_CATEGORY_COLOR_MAP,
