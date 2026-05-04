@@ -22,7 +22,7 @@ export const AppTitle: FC = () => (
         'focus:ring-2 focus:ring-gray-800'
       )}
     >
-      <span>Berliner</span>
+      <span>Dresdner</span>
       <span className="text-layer-turquoise-300">Erfrischungskarte</span>
     </InternalLink>
   </div>

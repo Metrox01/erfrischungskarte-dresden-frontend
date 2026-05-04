@@ -8,6 +8,7 @@ export interface MapFilledPolygonLayerType {
   }
   fillColorMap: Map<number | string, string>
   fillColorProperty: string
+  fillColorMode?: 'match' | 'step'
   isVisible?: boolean
 }
 
@@ -16,22 +17,33 @@ export const MapFilledPolygonLayer: FC<MapFilledPolygonLayerType> = ({
   tileset,
   fillColorMap,
   fillColorProperty,
+  fillColorMode = 'match',
   isVisible = true,
 }) => {
-  const flattenedFillColorMap = Array.from(fillColorMap).flat(2)
+  const fillColorExpression =
+    fillColorMode === 'step'
+      ? [
+          'step',
+          ['get', fillColorProperty],
+          'rgba(255,255,255,0)',
+          ...Array.from(fillColorMap)
+            .sort((a, b) => Number(a[0]) - Number(b[0]))
+            .flat(),
+        ]
+      : [
+          'match',
+          ['get', fillColorProperty],
+          ...Array.from(fillColorMap).flat(2),
+          'rgba(255,255,255,0)',
+        ]
 
   const layerStyle: LayerProps = {
     id,
     type: 'fill',
     'source-layer': tileset.layerName,
     paint: {
-      'fill-color': [
-        'match',
-        ['get', `${fillColorProperty}`],
-        ...flattenedFillColorMap,
-        /* fallback color (transparent) */
-        'rgba(255,255,255,0)',
-      ],
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
+      'fill-color': fillColorExpression as any,
       'fill-opacity': 0.5,
     },
     layout: {

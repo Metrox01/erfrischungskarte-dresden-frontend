@@ -11,4 +11,6 @@ Target: export const MAP_STYLE_URL =
 
 ## src/modules/RefreshmentMap/content.tsx
 
-- No JSDoc blocks found.
+- Uses heatstress data from the open-data-portal Dresden to display areas with different
+- heatstress levels. This indicates cooler areas within the city.
+Target: export const HEATSTRESS_DATA: Pick<

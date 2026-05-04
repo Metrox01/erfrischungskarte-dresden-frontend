@@ -6,7 +6,6 @@ import { useHasMobileSize } from '@lib/hooks/useHasMobileSize'
 import { MapControls } from '@components/MapControls'
 import {
   EXTRUDED_BUILDINGS_DATA,
-  HEATSTRESS_DATA,
   HOURS,
   TEMPERATURE_DATA,
   WIND_DATA,
@@ -89,7 +88,6 @@ export const RefreshmentMap: FC<RefreshmentMapPropType> = (pageProps) => {
   const activeHourKey = `${
     mappedQuery.visibleHour || currentTime
   }` as keyof typeof HOURS
-  const activeHour = HOURS[activeHourKey]
 
   const hourKeys = Object.keys(HOURS) as HourType[]
   const [poiTooltipContent, setPoiTooltipContent] = useState<Pick<
@@ -172,18 +170,18 @@ export const RefreshmentMap: FC<RefreshmentMapPropType> = (pageProps) => {
         )}
         <FilledPolygonLayer
           {...WIND_DATA}
-          fillColorProperty={activeHour.vectorTilesetKey}
+          fillColorProperty="deskn1"
           isVisible={mappedQuery.showWind !== false}
         />
-        <FilledPolygonLayer
+        {/* <FilledPolygonLayer
           {...TEMPERATURE_DATA}
           fillColorProperty={activeHour.vectorTilesetKey}
           isVisible={mappedQuery.showTemperature !== false}
-        />
+        /> */}
         <FilledPolygonLayer
-          {...HEATSTRESS_DATA}
+          {...TEMPERATURE_DATA}
           fillColorProperty="desk3"
-          isVisible={mappedQuery.showHeatstress !== false}
+          isVisible={mappedQuery.showTemperature !== false}
         />
         {hasWebPSupport &&
           hourKeys.map((key) => (

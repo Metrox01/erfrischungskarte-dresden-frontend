@@ -12,10 +12,10 @@ describe('AppTitle', () => {
   test('should render the title', () => {
     render(<AppTitle />)
 
-    const berliner = screen.getByText('Berliner')
+    const dresdner = screen.getByText('Dresdner')
     const erfrischungskarte = screen.getByText('Erfrischungskarte')
 
-    expect(berliner).toBeInTheDocument()
+    expect(dresdner).toBeInTheDocument()
     expect(erfrischungskarte).toBeInTheDocument()
   })
 })

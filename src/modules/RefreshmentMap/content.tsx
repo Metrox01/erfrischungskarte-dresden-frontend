@@ -106,7 +106,7 @@ export const HOURS: HourDataType = {
 
 export type QuantileValues = 1 | 2 | 3 | 4 | 5
 
-export const WIND_DATA: Pick<
+/* export const WIND_DATA: Pick<
   MapFilledPolygonLayerType,
   'id' | 'tileset' | 'fillColorMap'
 > = {
@@ -123,9 +123,29 @@ export const WIND_DATA: Pick<
     [2, colors['layer-green'][100]],
     [1, 'rgba(255,255,255,0)'],
   ]),
+} */
+
+export const WIND_DATA: Pick<
+  MapFilledPolygonLayerType,
+  'id' | 'tileset' | 'fillColorMap' | 'fillColorMode'
+> = {
+  id: 'wind-data',
+  tileset: {
+    url: 'mapbox://laschfabian.5t9g5dk7',
+    layerName: 'windgeschwindigkeiten-mittel_-64ynyu',
+  },
+  fillColorMode: 'step',
+  fillColorMap: new Map([
+    [1.943, 'rgba(255,255,255,0)'],
+    [2.72, colors['layer-green'][100]],
+    [3.044, colors['layer-green'][200]],
+    [3.477, colors['layer-green'][300]],
+    [4.021, colors['layer-green'][400]],
+    [5.312, colors['layer-green'][500]],
+  ]),
 }
 
-export const TEMPERATURE_DATA: Pick<
+/* export const TEMPERATURE_DATA: Pick<
   MapFilledPolygonLayerType,
   'id' | 'tileset' | 'fillColorMap'
 > = {
@@ -141,13 +161,17 @@ export const TEMPERATURE_DATA: Pick<
     [4, colors['layer-blue'][100]],
     [5, 'rgba(255,255,255,0)'],
   ]),
-}
+} */
 
-export const HEATSTRESS_DATA: Pick<
+/**
+ * Uses heatstress data from the open-data-portal Dresden to display areas with different
+ * heatstress levels. This indicates cooler areas within the city.
+ */
+export const TEMPERATURE_DATA: Pick<
   MapFilledPolygonLayerType,
   'id' | 'tileset' | 'fillColorMap'
 > = {
-  id: 'heatstress-data',
+  id: 'temperature-data',
   tileset: {
     url: 'mapbox://laschfabian.dw3vul58',
     layerName: 'waermebelastung_dd-50a3sc',

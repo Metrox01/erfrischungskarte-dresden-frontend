@@ -28,11 +28,11 @@ interface HeadPropType {
 
 export const Head: FC<Partial<HeadPropType>> = ({
   description = '',
-  siteTitle = 'Berliner Erfrischungskarte',
+  siteTitle = 'Dresdner Erfrischungskarte',
   pageTitle = 'Karte',
   fbAppId = '',
   keywords = [
-    'Berlin',
+    'Dresden',
     'Heatmap',
     'Temperatur',
     'Wind',
