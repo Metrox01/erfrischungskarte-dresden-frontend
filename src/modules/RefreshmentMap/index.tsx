@@ -6,6 +6,7 @@ import { useHasMobileSize } from '@lib/hooks/useHasMobileSize'
 import { MapControls } from '@components/MapControls'
 import {
   EXTRUDED_BUILDINGS_DATA,
+  HEATSTRESS_DATA,
   HOURS,
   TEMPERATURE_DATA,
   WIND_DATA,
@@ -178,6 +179,11 @@ export const RefreshmentMap: FC<RefreshmentMapPropType> = (pageProps) => {
           {...TEMPERATURE_DATA}
           fillColorProperty={activeHour.vectorTilesetKey}
           isVisible={mappedQuery.showTemperature !== false}
+        />
+        <FilledPolygonLayer
+          {...HEATSTRESS_DATA}
+          fillColorProperty="desk3"
+          isVisible={mappedQuery.showHeatstress !== false}
         />
         {hasWebPSupport &&
           hourKeys.map((key) => (

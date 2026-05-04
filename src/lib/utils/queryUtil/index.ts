@@ -8,6 +8,7 @@ export interface PageQueryType {
   showShadows: boolean | null
   showTemperature: boolean | null
   showWind: boolean | null
+  showHeatstress: boolean | null
   visibleHour: NumberHourType | null
   searchTerm: string | null
 }
@@ -86,5 +87,6 @@ export const mapRawQueryToState = (
     showShadows: parseBoolean(rawQuery.showShadows),
     showTemperature: parseBoolean(rawQuery.showTemperature),
     showWind: parseBoolean(rawQuery.showWind),
+    showHeatstress: parseBoolean(rawQuery.showHeatstress),
     searchTerm: parseString(rawQuery.searchTerm),
   })

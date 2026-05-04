@@ -143,6 +143,24 @@ export const TEMPERATURE_DATA: Pick<
   ]),
 }
 
+export const HEATSTRESS_DATA: Pick<
+  MapFilledPolygonLayerType,
+  'id' | 'tileset' | 'fillColorMap'
+> = {
+  id: 'heatstress-data',
+  tileset: {
+    url: 'mapbox://laschfabian.dw3vul58',
+    layerName: 'waermebelastung_dd-50a3sc',
+  },
+  fillColorMap: new Map([
+    ['höchste', 'rgba(255,255,255,0)'],
+    ['hohes', colors['layer-blue'][100]],
+    ['mittlere', colors['layer-blue'][200]],
+    ['geringe', colors['layer-blue'][300]],
+    ['kein bis geringstes', colors['layer-blue'][400]],
+  ]),
+}
+
 export const EXTRUDED_BUILDINGS_DATA: MapExtrusionLayerType = {
   id: '3d-buildings',
   url: 'mapbox://mapbox.mapbox-streets-v8',

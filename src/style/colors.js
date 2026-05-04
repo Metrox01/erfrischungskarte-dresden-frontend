@@ -23,6 +23,12 @@ const colors = {
     '300': '#76B3A6',
     '400': '#416D68',
   },
+  'layer-red': {
+    '100': '#FDE0E0',
+    '200': '#F9A9A9',
+    '300': '#F14D4D',
+    '400': '#7A0000',
+  },
   'poi-green': '#328917',
   'poi-darkblue': '#2445BC',
   'poi-lightblue': '#3EBEF4',

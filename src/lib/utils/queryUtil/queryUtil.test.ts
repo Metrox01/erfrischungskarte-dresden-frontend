@@ -9,6 +9,7 @@ describe('mapRawQueryToState', () => {
     const testShowShadows = true
     const testShowTemperature = false
     const testShowWind = true
+    const testShowHeatstress = false
     const testVisibleHour = 14
     const testSearchTerm = 'Kreuzberg'
     const queryState = mapRawQueryToState({
@@ -19,6 +20,7 @@ describe('mapRawQueryToState', () => {
       showShadows: testShowShadows.toString(),
       showTemperature: testShowTemperature.toString(),
       showWind: testShowWind.toString(),
+      showHeatstress: testShowHeatstress.toString(),
       visibleHour: testVisibleHour.toString(),
       searchTerm: testSearchTerm,
     })
@@ -30,6 +32,7 @@ describe('mapRawQueryToState', () => {
     expect(queryState.showShadows).toBe(testShowShadows)
     expect(queryState.showTemperature).toBe(testShowTemperature)
     expect(queryState.showWind).toBe(testShowWind)
+    expect(queryState.showHeatstress).toBe(testShowHeatstress)
     expect(queryState.visibleHour).toBe(testVisibleHour)
     expect(queryState.searchTerm).toBe(testSearchTerm)
   })
