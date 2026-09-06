@@ -1,4 +1,4 @@
-import { TemperatureIcon, WindIcon, ShadeIcon } from '@components/Icons'
+import { TemperatureIcon, WindIcon } from '@components/Icons'
 import { LayerLegendBlockType } from '@components/LayerLegendBlock'
 import { MapPointLayerType } from '@components/MapPointLayer'
 import classNames from 'classnames'
@@ -6,8 +6,6 @@ import { MapExtrusionLayerType } from '../../components/MapExtrusionLayer'
 import { MapFilledPolygonLayerType } from '../../components/MapFilledPolygonLayer'
 import colors from '../../style/colors'
 import { LayerLegendFigure } from '@components/LayerLegendFigure'
-import Image from 'next/image'
-import shadeImage from '../../../public/images/shade-legend.png'
 
 export interface SearchSuggestionItemType {
   type: string
@@ -15,8 +13,8 @@ export interface SearchSuggestionItemType {
     name: string
     conditions: string
     category: PoiCategory
-    bezirk: string
-    bezirksreg: string
+    bezirk?: string
+    bezirksreg?: string
   }
   geometry: {
     type: 'Point'
@@ -198,52 +196,62 @@ export const EXTRUDED_BUILDINGS_DATA: MapExtrusionLayerType = {
 }
 
 export type PoiCategory =
-  | 'Sitzbank'
-  | 'Picknicktisch'
+  // | 'Sitzbank' // not available in Dresden
+  // | 'Picknicktisch' // not available in Dresden
   | 'Grünanlage'
   | 'Trinkbrunnen'
-  | 'Brunnen'
+  // | 'Brunnen' // not available in Dresden
   | 'Refill Station'
-  | 'Wasserspielplatz'
-  | 'Badestelle'
-  | 'Strandbad'
+  // | 'Wasserspielplatz' // not available in Dresden
+  // | 'Badestelle' // not available in Dresden
+  // | 'Strandbad' // not available in Dresden
   | 'Freibad'
   | 'Schwimmhalle'
   | 'Toilette'
-  | 'Öffentlicher "Kühler Raum"'
+  // | 'Öffentlicher "Kühler Raum"' // not available in Dresden
+  | 'Wassersportstätte'
 
 export const POI_CATEGORY_COLOR_MAP: Map<PoiCategory, string> = new Map([
-  ['Badestelle', colors['poi-darkblue']],
-  ['Strandbad', colors['poi-darkblue']],
+  // ['Badestelle' — not available in Dresden data]
+  // ['Badestelle', colors['poi-darkblue']],
+  // ['Strandbad' — not available in Dresden data]
+  // ['Strandbad', colors['poi-darkblue']],
   ['Freibad', colors['poi-darkblue']],
   ['Schwimmhalle', colors['poi-darkblue']],
-  ['Wasserspielplatz', colors['poi-pink']],
+  // ['Wasserspielplatz' — not available in Dresden data]
+  // ['Wasserspielplatz', colors['poi-pink']],
   ['Trinkbrunnen', colors['poi-lightblue']],
-  ['Brunnen', colors['poi-turquoise']],
+  // ['Brunnen' — not available in Dresden data]
+  // ['Brunnen', colors['poi-turquoise']],
   ['Refill Station', colors['poi-lightblue']],
   ['Grünanlage', colors['poi-green']],
-  ['Sitzbank', colors['poi-yellow']],
-  ['Picknicktisch', colors['poi-red']],
+  // ['Sitzbank' — not available in Dresden data]
+  // ['Sitzbank', colors['poi-yellow']],
+  // ['Picknicktisch' — not available in Dresden data]
+  // ['Picknicktisch', colors['poi-red']],
   ['Toilette', colors['poi-orange']],
-  ['Öffentlicher "Kühler Raum"', colors['poi-darkgrey']],
+  // ['Öffentlicher "Kühler Raum"' — not available in Dresden data]
+  // ['Öffentlicher "Kühler Raum"', colors['poi-darkgrey']],
+  ['Wassersportstätte', colors['poi-darkblue']],
 ])
 
-type PoiCategoryId = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13
+type PoiCategoryId = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14
 
 export const POI_CATEGORY_ID_MAP: { [key in PoiCategory]: PoiCategoryId } = {
-  Badestelle: 1,
-  Strandbad: 2,
+  // Badestelle: 1, // not available in Dresden
+  // Strandbad: 2, // not available in Dresden
   Freibad: 3,
   Schwimmhalle: 4,
-  Wasserspielplatz: 5,
+  // Wasserspielplatz: 5, // not available in Dresden
   Trinkbrunnen: 6,
-  Brunnen: 7,
+  // Brunnen: 7, // not available in Dresden
   Grünanlage: 8,
-  Sitzbank: 9,
-  Picknicktisch: 10,
+  // Sitzbank: 9, // not available in Dresden
+  // Picknicktisch: 10, // not available in Dresden
   Toilette: 11,
-  'Öffentlicher "Kühler Raum"': 12,
+  // 'Öffentlicher "Kühler Raum"': 12, // not available in Dresden
   'Refill Station': 13,
+  Wassersportstätte: 14,
 }
 
 export interface PoiDataType extends MapPointLayerType {
@@ -259,62 +267,58 @@ export const POI_DATA: PoiDataType = {
     layerName: 'pois_jun2025-bkayoz',
   }, */
   tileset: {
-    url: 'mapbox://laschfabian.cmkfzruau1q2c1omn821mde15-45vsv',
-    layerName: 'pois-dresden',
+    url: 'mapbox://laschfabian.cmp4c190b0al51po1r764uy9e-4422h',
+    layerName: 'pois_dresden_may',
   },
   fillColorProperty: 'category',
   fillColorMap: POI_CATEGORY_COLOR_MAP,
   activePropertyKeys: [
-    'Badestelle',
-    'Strandbad',
+    // 'Badestelle', // not available in Dresden
+    // 'Strandbad', // not available in Dresden
     'Freibad',
     'Schwimmhalle',
-    'Wasserspielplatz',
+    // 'Wasserspielplatz', // not available in Dresden
     'Trinkbrunnen',
-    'Brunnen',
+    // 'Brunnen', // not available in Dresden
     'Refill Station',
     'Grünanlage',
-    'Sitzbank',
-    'Picknicktisch',
+    // 'Sitzbank', // not available in Dresden
+    // 'Picknicktisch', // not available in Dresden
     'Toilette',
-    'Öffentlicher "Kühler Raum"',
+    // 'Öffentlicher "Kühler Raum"', // not available in Dresden
+    'Wassersportstätte',
   ],
 }
 
 export const ABOUT_INTRODUCTION_TEXT = (
   <>
     Der Klimawandel sorgt an vielen Orten für immer heißeres, trockeneres
-    Wetter. Auch Berlin erlebte in den vergangenen Jahren so viele Hitzetage wie
-    nie zuvor. Wo, wann und wie ihr an solchen Tagen Erfrischung findet, seht
-    ihr in dieser Karte. Sie zeigt euch für jede Stunde von 10 bis 20 Uhr, wo es
-    tendenziell eher kühl ist, wo für gewöhnlich eine frische Brise weht und wo
-    gerade Schatten ist. Aufgrund der differenzierten Topographie kann es zum
-    Teil erhebliche Unterschiede innerhalb des Stadtgebietes geben. Entdeckt
-    außerdem erfrischende Orte, wie Badestellen, Trinkbrunnen und Parks. Mit
-    einem Klick über die Teilenfunktion könnt ihr euren neuen Lieblingsplatz mit
+    Wetter. Auch Dresden erlebte in den vergangenen Jahren zunehmend mehr
+    Hitzetage. Wo ihr an solchen Tagen Erfrischung findet, seht ihr in dieser
+    Karte. Sie zeigt euch, wo es tendenziell eher kühl ist und wo für gewöhnlich
+    eine frische Brise weht. Aufgrund der differenzierten Topographie kann es
+    zum Teil erhebliche Unterschiede innerhalb des Stadtgebietes geben. Entdeckt
+    außerdem erfrischende Orte, wie Freibäder, Trinkbrunnen und Parks. Mit einem
+    Klick über die Teilenfunktion könnt ihr euren neuen Lieblingsplatz mit
     anderen teilen.
     <br />
     <br />
-    Diese Anwendung basiert komplett auf offenen Daten. Open Data ist heute ein
-    wichtiger Bestandteil im Verwaltungshandeln Berlins und schafft nicht nur
-    Transparenz und Offenheit, sondern ermöglicht auch Analysen und Anwendungen
-    wie diese, um den Alltag ein kleines bisschen angenehmer zu machen. Deshalb
-    unterstützt und berät die{' '}
+    Diese Anwendung basiert komplett auf offenen Daten und ist eine Adaption der{' '}
     <a
       target="blank"
-      href="https://odis-berlin.de"
+      href="https://erfrischungskarte.odis-berlin.de"
       className="text-gray-800 underline"
     >
-      Open Data Infor&shy;mations&shy;stelle
+      Berliner Erfrischungskarte
     </a>{' '}
-    Berliner Behörden bei der Bereit&shy;stellung von Open Data. Mehr offene
-    Daten findet ihr im{' '}
+    der Technologiestiftung Berlin. Die Dresdner Version nutzt offene Geodaten
+    der Stadt Dresden aus dem{' '}
     <a
       target="blank"
-      href="https://daten.berlin.de"
+      href="https://opendata.dresden.de"
       className="text-gray-800 underline"
     >
-      Berliner Datenportal
+      Open-Data-Portal Dresden
     </a>
     .
   </>
@@ -322,17 +326,6 @@ export const ABOUT_INTRODUCTION_TEXT = (
 
 export const ABOUT_CONTACT_TEXT = (
   <>
-    <p>
-      Informationen zum Thema Hitzeschutz findest du auch auf der{' '}
-      <a
-        target="blank"
-        href="https://www.berlin.de/baerenhitze/"
-        className="text-gray-800 underline"
-      >
-        Bärenhitze-Seite
-      </a>{' '}
-      des Landesamts für Gesundheit und Soziales (LaGeSo).
-    </p>
     <p>
       Bei{' '}
       <a
@@ -346,50 +339,35 @@ export const ABOUT_CONTACT_TEXT = (
       auffüllen kannst.
     </p>
     <p className="mt-3">
-      {' '}
-      Den{' '}
+      Diese Anwendung basiert auf der{' '}
       <a
         href="https://github.com/technologiestiftung/erfrischungskarte-frontend/"
         target="_blank"
         rel="noopener noreferrer"
         className="text-gray-800 underline"
       >
-        Quellcode
+        Berliner Erfrischungskarte
       </a>{' '}
-      der Erfrischungskarte findest du auf GitHub.
-    </p>
-    <p className="mt-3">
-      Eine Frage oder Feedback? Schreib uns an{' '}
-      <a
-        href="mailto:odis@ts.berlin"
-        target="_blank"
-        rel="noreferrer"
-        className="text-gray-800 underline"
-      >
-        odis@ts.berlin
-      </a>
+      der Technologiestiftung Berlin (MIT-Lizenz).
     </p>
   </>
 )
 
 export const ABOUT_HOW_TO = (
   <>
-    Mit dieser Karte ist es möglich verschiedene Bereiche in Berlin im Hinblick
-    auf ihre klimatische Funktion (neu) zu entdecken. Die Untersuchung des
+    Mit dieser Karte ist es möglich, verschiedene Bereiche in Dresden im
+    Hinblick auf ihre klimatische Funktion zu entdecken. Die Untersuchung des
     Stadtklimas ist ein wichtiger Aspekt in der Stadtentwicklung und -planung,
-    um die Lebensqualität zu erhöhen und uns Stadtbewohner*innen weniger
-    gesundheitlichem Risiko auszusetzen. Drei wichtige Faktoren, die ein lokales
-    Klima ausmachen sind Beschattung, Lufttemperatur und Kaltluftentstehung.
-    Über die Filterfunktion können die drei verschiedenen Faktoren einzeln
-    angezeigt oder ausgeblendet werden. Die Karte zeigt anhand der Farbskalen
-    wie sich Temperaturen und Menge an kühlem Wind an einem typischen Sommertag
-    an verschiedenen Orten der Stadt über den Tagesverlauf unterscheiden.
-    Prinzipiell zeigen dunklere Flächen an, dass dies ein erfrischender Ort für
-    heiße Sommertage mit einer positiven klimarelevanten Wirkung für die Stadt
-    ist. Helle Flächen dagegen sprechen für sich stark aufheizende, wenig
-    kaltluftproduzierende Flächen. Es handelt sich bei den zugrundeliegenden
-    Werten um Verhältnisse und keine absoluten Zahlen. Die Daten beruhen auf
-    Modellierungen für einen typischen Sommertag.
+    um die Lebensqualität zu erhöhen und gesundheitliche Risiken durch Hitze zu
+    verringern. Zwei wichtige Faktoren, die das lokale Klima ausmachen, sind
+    Lufttemperatur bzw. Wärmebelastung und Windgeschwindigkeit. Über die
+    Filterfunktion können diese Faktoren einzeln angezeigt oder ausgeblendet
+    werden. Die Karte zeigt anhand der Farbskalen, wie sich Wärmebelastung und
+    Windverhältnisse an verschiedenen Orten der Stadt unterscheiden. Dunklere
+    Flächen zeigen an, dass dies ein erfrischender Ort für heiße Sommertage ist.
+    Helle Flächen dagegen sprechen für sich stark aufheizende Bereiche. Die
+    Daten beruhen auf Modellierungen und Geodaten aus dem Open-Data-Portal der
+    Stadt Dresden.
   </>
 )
 
@@ -398,103 +376,59 @@ export const ABOUT_SHADOW_TEXT = (
     Ein wichtiger Faktor für das lokale Aufheizen und die Entstehung von
     Hitzeinseln an heißen Tagen ist, wie lange ein Bereich der Sonne ausgesetzt
     oder beschattet ist. Klimatisch und für das Wohlbefinden von Vorteil sind
-    Parks und Straßenzüge mit vielen Bäumen, die Schatten spenden. Die Schatten
-    wurden auf Grundlage der Topographie, nämlich mittels eines{' '}
-    <a
-      target="blank"
-      href="https://fbinter.stadt-berlin.de/fb/index.jsp?loginkey=zoomStart&mapId=k_dom@senstadt&bbox=387046,5818588,391547,5821400"
-      className="text-gray-800 underline"
-    >
-      bildbasierten Digitalen Oberflächenmodells (bDOM)
-    </a>{' '}
-    von Berlin in Kombination mit Informationen zum Stand der Sonne zu jeder
-    Uhrzeit für den 1.Juli berechnet. Dafür wurde das r.sun-Tool des{' '}
-    <a
-      target="blank"
-      href="https://grass.osgeo.org"
-      className="text-gray-800 underline"
-    >
-      Geographic Resources Analysis Support System (GRASS)
-    </a>{' '}
-    , einem Open-Source-GIS, verwendet. Das bDOM enthält die Höhen der
-    Erdoberfläche mit allen natürlichen (wie z.B. Vegetation) und künstlichen
-    Objekten (Bauwerken) für das gesamte Stadtgebiet und hat eine Auflösung von
-    2 Metern. Die Schatten variieren im Laufe des Jahres, unsere Darstellung
-    kann also je nach Zeitpunkt der Betrachtung von der Realität abweichen.
+    Parks und Straßenzüge mit vielen Bäumen, die Schatten spenden. Für die
+    Berliner Erfrischungskarte wurden Schattendaten auf Grundlage eines
+    bildbasierten Digitalen Oberflächenmodells (bDOM) berechnet. Für Dresden
+    steht ein solches Modell derzeit nicht als offener Datensatz zur Verfügung,
+    weshalb die Schattendarstellung in dieser Adaption nicht aktiviert ist. Bei
+    zukünftiger Verfügbarkeit entsprechender Daten kann dieses Feature ergänzt
+    werden.
   </>
 )
 
 export const ABOUT_COOL_TEXT = (
   <>
-    Die Klassifizierung der kühlen Bereiche beruht auf Daten aus einem
-    numerischen{' '}
+    Die Darstellung der Wärmebelastung basiert auf Geodaten aus dem{' '}
     <a
       target="blank"
-      href="https://www.berlin.de/umweltatlas/klima/klimaanalyse/2014/karten/"
+      href="https://opendata.dresden.de"
       className="text-gray-800 underline"
     >
-      Klimamodell
-    </a>{' '}
-    der Senatsverwaltung für Stadtentwicklung und Wohnen von 2014. Die
-    Temperaturen wurden in 2 Metern Höhe über dem Boden bestimmt. Der Datensatz
-    enthält Temperaturdaten für 4 Uhr, 14 Uhr und 22 Uhr, modelliert für einen
-    typischen Sommertag, mit einer Auflösung von 10 Metern. Die Werte für
-    weitere in unserer Anwendung dargestellte Stunden wurden zwischen diesen
-    Beobachtungszeitpunkten interpoliert. Alle Datenwerte wurden dann in
-    Quintile unterteilt und anschließend fünf Klassen von kühl bis weniger kühl
-    zugeordnet. Die Farbskalen geben also eine relative Einstufung der
-    jeweiligen Stadtbereiche im Vergleich zu den anderen Beobachtungen wieder
-    und keine absoluten Werte. Das Script und die verarbeiteten Daten sind{' '}
-    <a
-      target="blank"
-      href="https://github.com/technologiestiftung/erfrischungskarte-daten/tree/main/Wind_Temperature"
-      className="text-gray-800 underline"
-    >
-      hier
-    </a>{' '}
-    zu finden. <br></br>
-    Für die Temperaturverteilung ausschlaggebend sind u.a. die Boden- und
+      Open-Data-Portal der Stadt Dresden
+    </a>
+    . Der Datensatz klassifiziert die Wärmebelastung in fünf qualitative
+    Kategorien: &quot;höchste&quot;, &quot;hohes&quot;, &quot;mittlere&quot;,
+    &quot;geringe&quot; und &quot;kein bis geringstes&quot;. Im Unterschied zur
+    Berliner Vorlage, die auf einem numerischen Klimamodell mit stundengenauer
+    Auflösung basiert, handelt es sich bei den Dresdner Daten um eine statische
+    Klassifizierung ohne Tagesverlauf. <br></br>
+    Für die Wärmebelastung ausschlaggebend sind u.a. die Boden- und
     Oberflächeneigenschaften. Waldflächen und größere Grünanlagen wie der Große
-    Tiergarten weisen deutlich niedrigere Temperaturen auf, als baulich geprägte
-    Gebiete, bei denen sich jedoch auch kleinräumige Unterschiede erkennen
-    lassen. Wasserflächen verhalten sich aufgrund ihrer spezifischen
-    Wärmekapazität sehr homogen und wirken tagsüber klimatisch ausgleichend.
+    Garten weisen eine deutlich geringere Wärmebelastung auf als baulich
+    geprägte Gebiete. Wasserflächen wie die Elbe wirken aufgrund ihrer
+    spezifischen Wärmekapazität klimatisch ausgleichend.
   </>
 )
 export const ABOUT_WINDY_TEXT = (
   <>
-    Genau wie bei den kühlen Bereichen beruht die Klassifizierung der
-    sogenannten kaltluftproduzierenden Bereiche ebenfalls auf Daten aus einem{' '}
+    Die Darstellung der Windverhältnisse basiert auf Geodaten zu mittleren
+    Windgeschwindigkeiten aus dem{' '}
     <a
       target="blank"
-      href="https://www.berlin.de/umweltatlas/klima/klimaanalyse/2014/karten/"
+      href="https://opendata.dresden.de"
       className="text-gray-800 underline"
     >
-      Klimamodell
-    </a>{' '}
-    der Senatsverwaltung für Stadtentwicklung und Wohnen von 2014. Der
-    Kaltluftvolumenstrom wird definiert durch die Anzahl der Kubikmeter des
-    kalten Windes, der pro Sekunde durch eine 10x10-Meter-Fläche strömt. Der
-    Datensatz enthält Kaltluftvolumendaten für 4 Uhr und 22 Uhr, modelliert für
-    einen typischen Sommertag, mit einer Auflösung von 10 Metern. Die Werte für
-    weitere in unserer Anwendung dargestellte Stunden wurden zwischen diesen
-    Beobachtungszeitpunkten interpoliert. Alle Datenwerte wurden dann in
-    Quintile unterteilt und anschließend fünf Klassen von viel Kaltluft bis
-    weniger Kaltluft zugeordnet. Die Farbskalen geben also eine relative
-    Einstufung der jeweilgen Stadtbereiche im Vergleich zu den anderen
-    Beobachtungen wieder und keine absoluten Werte. Das Script und die
-    verarbeiteten Daten sind{' '}
-    <a
-      target="blank"
-      href="https://github.com/technologiestiftung/erfrischungskarte-daten/tree/main/Wind_Temperature"
-      className="text-gray-800 underline"
-    >
-      hier
-    </a>{' '}
-    zu finden. <br></br>Es ist zu erkennen, dass die kaltluftproduzierenden
-    Bereiche häufig Freiflächen wie Wälder, Parkanlagen und Kleingartenflächen
-    sind. Die dadurch entstehende gute Durchlüftung kann die Hitzebelastung an
-    Sommertagen reduzieren und wirkt sich auch auf die umliegenden Bereiche aus.
+      Open-Data-Portal der Stadt Dresden
+    </a>
+    . Im Unterschied zur Berliner Vorlage, die Kaltluftvolumenströme als
+    Quintile darstellt, werden hier die numerischen Windgeschwindigkeitswerte in
+    Meter pro Sekunde verwendet und über definierte Schwellenwerte in Farbstufen
+    eingeteilt. Auch diese Darstellung ist statisch und bildet keinen
+    Tagesverlauf ab. <br></br>
+    Bereiche mit höheren Windgeschwindigkeiten bieten an heißen Sommertagen eine
+    bessere Durchlüftung. Diese finden sich häufig in Freiflächen, entlang des
+    Elbtals und in größeren Parkanlagen. Die gute Durchlüftung kann die
+    Hitzebelastung reduzieren und wirkt sich auch auf umliegende Bereiche aus.
   </>
 )
 
@@ -529,68 +463,36 @@ export const ABOUT_WEATHER_TEXT = (
       BrightSky
     </a>{' '}
     , bietet eine kostenlose JSON-API an, um Wetterdaten ganz einfach
-    abzufragen. So können die Wettervorhersagen für Berlin stundengenau
+    abzufragen. So können die Wettervorhersagen für Dresden stundengenau
     dargestellt werden.
   </>
 )
 
 export const ABOUT_POINTS_TEXT = (
   <>
-    Die Erfrischungsorte stammen aus verschiedenen Quellen: Die Koordinaten der{' '}
+    Die Erfrischungsorte stammen aus verschiedenen offenen Datenquellen der
+    Stadt Dresden. Die Standorte der{' '}
     <a
       target="blank"
-      href="https://daten.berlin.de/datensaetze/grünanlagenbestand-berlin-einschl-der-öffentlichen-spielplätze-grünanlagen-wfs"
+      href="https://opendata.dresden.de"
       className="text-gray-800 underline"
     >
-      Grünanlagen
+      Parkanlagen
     </a>{' '}
-    wurden aus einem Datensatz zum öffentlichen Grünanlagenbestand erstellt.
-    Dieser wird durch die bezirklichen Straßen- und Grünflächenämter gepflegt
-    und im Berliner Geodatenportal zur Verfügung gestellt. Die Standorte der{' '}
+    wurden aus dem Open-Data-Portal der Stadt Dresden bezogen. Die{' '}
+    <b>Freibäder</b>, <b>Schwimmhallen</b> und <b>Wassersportstätten</b> stammen
+    ebenfalls aus offenen Datensätzen der Stadt. Die Standorte der{' '}
+    <b>öffentlichen Toiletten</b> umfassen sowohl städtische Anlagen als auch
+    barrierefreie WCs und Standorte der{' '}
     <a
       target="blank"
-      href="https://daten.berlin.de/datensaetze/atkis-sonstiges-bauwerk-oder-sonstige-einrichtung-punkte-wfs"
+      href="https://www.nette-toilette.de/"
       className="text-gray-800 underline"
     >
-      Zierbrunnen
-    </a>{' '}
-    finden sich ebenfalls im Geodatenportal und sind Bestandteil des
-    umfangreichen ATKIS-Datensatzes, der regelmäßig durch die bezirklichen
-    Vermessungsämter aktualisiert wird. Auch die Positionen der{' '}
-    <a
-      target="blank"
-      href="https://fbinter.stadt-berlin.de/fb/index.jsp?loginkey=zoomStart&mapId=k_toiletten@senstadt&bbox=364921,5798767,421042,5838775"
-      className="text-gray-800 underline"
-    >
-      öffentlichen Toiletten
-    </a>{' '}
-    sind im Geodatenportal verfügbar. Die Standorte der{' '}
-    <a
-      target="blank"
-      href="https://daten.berlin.de/datensaetze/liste-der-badestellen"
-      className="text-gray-800 underline"
-    >
-      Badestellen und Strandbäder
-    </a>{' '}
-    stammen vom Landesamt für Gesundheit und Soziales (LaGeSo), ebenso wie die{' '}
-    <a
-      target="blank"
-      href="https://www.berlin.de/baerenhitze/kuehle-raeume/"
-      className="text-gray-800 underline"
-    >
-      Öffentlichen &quot;Kühlen Räume&quot;
+      Nette-Toilette-Initiative
     </a>
-    . Die Informationen zu{' '}
-    <a
-      target="blank"
-      href="https://www.berlin.de/special/sport-und-fitness/schwimmen/schwimmbad/a-z/"
-      className="text-gray-800 underline"
-    >
-      Freibädern und Schwimmhallen
-    </a>{' '}
-    stehen derzeit nur als Liste über Berlin.de bereit. Sie wurden mittels
-    Webscraping in einen Geodatensatz überführt. Die Daten für die Refill
-    Stationen stammen von dem Projekt{' '}
+    . Die <b>Trinkbrunnen</b> wurden aus den offenen Geodaten der Stadt
+    übernommen. Die Daten für die Refill-Stationen stammen von dem Projekt{' '}
     <a
       target="blank"
       href="https://refill-deutschland.de/"
@@ -598,25 +500,8 @@ export const ABOUT_POINTS_TEXT = (
     >
       Refill Deutschland
     </a>
-    {'. '}
-    <a
-      target="blank"
-      href="https://overpass-turbo.eu/"
-      className="text-gray-800 underline"
-    >
-      Bänke, Picknicktische, Wasserspielplätze und Trinkbrunnen
-    </a>{' '}
-    wurden aus Open Street Map exportiert, einer frei zugänglichen Sammlung von
-    Geodaten. Den kompletten, für diese Anwendung aufbereiteten Datensatz
-    (letztes Update Juni 2023) findet ihr{' '}
-    <a
-      target="blank"
-      href="https://github.com/technologiestiftung/erfrischungskarte-daten/blob/main/POI's/erfrischungskarte_poi.geojson"
-      className="text-gray-800 underline"
-    >
-      hier
-    </a>
-    .
+    . Alle Datenquellen wurden mittels eines eigenen ETL-Scripts zusammengeführt
+    und als einheitliches GeoJSON für die Kartenvisualisierung aufbereitet.
   </>
 )
 
@@ -626,11 +511,12 @@ export const ABOUT_ACCORDION_ITEMS = [
     title: 'Wie liest man die Erfrischungskarte?',
     content: ABOUT_HOW_TO,
   },
-  {
-    id: 'shadows',
-    title: 'Schatten',
-    content: ABOUT_SHADOW_TEXT,
-  },
+  // Shadow accordion item disabled for Dresden – no bDOM data available yet.
+  // {
+  //   id: 'shadows',
+  //   title: 'Schatten',
+  //   content: ABOUT_SHADOW_TEXT,
+  // },
   {
     id: 'cool-areas',
     title: 'Kühle Bereiche',
@@ -657,220 +543,169 @@ export const SEARCH_SUGGESTIONS: SearchSuggestionItemType[] = [
   {
     type: 'Feature',
     properties: {
-      name: 'Volkspark Prenzlauer Berg',
+      name: 'Großer Garten (Palaisteich)',
       conditions: 'kühl, viel Schatten',
       category: 'Grünanlage',
-      bezirk: 'Pankow',
-      bezirksreg: 'Prenzlauer Berg Ost',
     },
     geometry: {
       type: 'Point',
-      coordinates: [13.462956678190112, 52.535800958365236],
+      coordinates: [13.76295, 51.04178],
     },
   },
   {
     type: 'Feature',
     properties: {
-      name: 'Wasserfall am Viktoriapark',
-      conditions: 'frische Brise, Ort zum Planschen',
-      category: 'Brunnen',
-      bezirk: 'Friedrichshain-Kreuz',
-      bezirksreg: 'Tempelhofer Vorstadt',
-    },
-    geometry: {
-      type: 'Point',
-      coordinates: [13.381775748438727, 52.4883004788636],
-    },
-  },
-  {
-    type: 'Feature',
-    properties: {
-      name: 'Picknickplatz in der Wuhlheide',
-      conditions: 'vergleichsweise kühl, Schattenplatz',
-      category: 'Picknicktisch',
-      bezirk: 'Treptow-Köpenick',
-      bezirksreg: 'Oberschöneweide',
-    },
-    geometry: {
-      type: 'Point',
-      coordinates: [13.543032625454064, 52.464473456034675],
-    },
-  },
-  {
-    type: 'Feature',
-    properties: {
-      name: 'Bank auf der Insel der Jugend',
-      conditions: 'abends kühl, frische Brise, Schattenplatz',
-      category: 'Sitzbank',
-      bezirk: 'Treptow-Köpenick',
-      bezirksreg: 'Alt-Treptow',
-    },
-    geometry: {
-      type: 'Point',
-      coordinates: [13.48055717115424, 52.48742303929486],
-    },
-  },
-  {
-    type: 'Feature',
-    properties: {
-      name: 'Bank am Neuen See im Tiergarten',
-      conditions: 'kühl, frische Brise, Schattenplatz',
-      category: 'Sitzbank',
-      bezirk: 'Mitte',
-      bezirksreg: 'Tiergarten Süd',
-    },
-    geometry: {
-      type: 'Point',
-      coordinates: [13.342557083117965, 52.510747963501423],
-    },
-  },
-  {
-    type: 'Feature',
-    properties: {
-      name: 'Tempelhofer Feld',
-      conditions: 'sonnig, abends kühl',
-      category: 'Grünanlage',
-      bezirk: 'Tempelhof-Schöneberg',
-      bezirksreg: 'Tempelhof',
-    },
-    geometry: {
-      type: 'Point',
-      coordinates: [13.401905451388535, 52.473382804163165],
-    },
-  },
-  {
-    type: 'Feature',
-    properties: {
-      name: 'Pfaueninsel',
-      conditions: 'frische Brise, viel Schatten',
-      category: 'Grünanlage',
-      bezirk: 'Steglitz-Zehlendorf',
-      bezirksreg: 'Zehlendorf Südwest',
-    },
-    geometry: {
-      type: 'Point',
-      coordinates: [13.128466445631712, 52.434577434433052],
-    },
-  },
-  {
-    type: 'Feature',
-    properties: {
-      name: 'Freizeitpark Marienfelde',
-      conditions: 'frische Brise, abends kühl',
-      category: 'Grünanlage',
-      bezirk: 'Tempelhof-Schöneberg',
-      bezirksreg: 'Mariendorf',
-    },
-    geometry: {
-      type: 'Point',
-      coordinates: [13.368104919794263, 52.401917820204453],
-    },
-  },
-  {
-    type: 'Feature',
-    properties: {
-      name: 'Britzer Garten',
-      conditions: 'vergleichsweise kühl',
-      category: 'Grünanlage',
-      bezirk: 'Neukölln',
-      bezirksreg: 'Britz',
-    },
-    geometry: {
-      type: 'Point',
-      coordinates: [13.420545479131675, 52.43107805049096],
-    },
-  },
-  {
-    type: 'Feature',
-    properties: {
-      name: 'Kinderbad im Bürgerpark Marzahn',
-      conditions: 'vormittags kühl, Ort zum Planschen',
+      name: 'Georg-Arnhold-Bad',
+      conditions: 'Ort zum Schwimmen',
       category: 'Freibad',
-      bezirk: 'Marzahn-Hellersdorf',
-      bezirksreg: 'Marzahn Mitte',
     },
     geometry: {
       type: 'Point',
-      coordinates: [13.562293000384942, 52.55217541391356],
+      coordinates: [13.75385, 51.04555],
     },
   },
   {
     type: 'Feature',
     properties: {
-      name: 'Badestelle am Tegler See',
-      conditions: 'kühl, frische Brise',
-      category: 'Badestelle',
-      bezirk: 'Reinickendorf',
-      bezirksreg: 'Tegler Forst',
+      name: 'Alaunpark',
+      conditions: 'kühl, Schattenplatz',
+      category: 'Grünanlage',
     },
     geometry: {
       type: 'Point',
-      coordinates: [13.25521056824976, 52.58564476407809],
+      coordinates: [13.75862, 51.06579],
     },
   },
   {
     type: 'Feature',
     properties: {
-      name: 'Wasserspielplatz im Mellenseepark',
-      conditions: 'Ort zum Planschen',
-      category: 'Wasserspielplatz',
-      bezirk: 'Lichtenberg',
-      bezirksreg: 'Freidrichsfelde Süd',
+      name: 'Freibad Wostra',
+      conditions: 'Ort zum Schwimmen',
+      category: 'Freibad',
     },
     geometry: {
       type: 'Point',
-      coordinates: [13.510822751366355, 52.494042504944467],
+      coordinates: [13.82726, 51.00776],
     },
   },
   {
     type: 'Feature',
     properties: {
-      name: 'Kaskade am Lietzensee',
-      conditions: 'vergleichsweise kühl, frische Brise',
-      category: 'Brunnen',
-      bezirk: 'Charlottenburg-Wilmersdorf',
-      bezirksreg: 'Neue Kantstraße',
+      name: 'Blüherpark',
+      conditions: 'kühl, viel Schatten',
+      category: 'Grünanlage',
     },
     geometry: {
       type: 'Point',
-      coordinates: [13.289194301350708, 52.503192234053408],
+      coordinates: [13.74613, 51.04442],
     },
   },
   {
     type: 'Feature',
     properties: {
-      name: 'Badestelle an der Unterhavel',
-      conditions: 'kühl, frische Brise, Ort zum Planschen',
-      category: 'Badestelle',
-      bezirk: 'Spandau',
-      bezirksreg: 'Gatow/Kladow',
+      name: 'Elbwiesen Johannstadt',
+      conditions: 'frische Brise, kühl',
+      category: 'Grünanlage',
     },
     geometry: {
       type: 'Point',
-      coordinates: [13.17983109345109, 52.465733635320788],
+      coordinates: [13.77245, 51.05623],
+    },
+  },
+  {
+    type: 'Feature',
+    properties: {
+      name: 'Freibad Cotta',
+      conditions: 'Ort zum Schwimmen',
+      category: 'Freibad',
+    },
+    geometry: {
+      type: 'Point',
+      coordinates: [13.69275, 51.05119],
+    },
+  },
+  {
+    type: 'Feature',
+    properties: {
+      name: 'Waldpark Blasewitz',
+      conditions: 'kühl, frische Brise, viel Schatten',
+      category: 'Grünanlage',
+    },
+    geometry: {
+      type: 'Point',
+      coordinates: [13.79736, 51.04788],
+    },
+  },
+  {
+    type: 'Feature',
+    properties: {
+      name: 'Stauseebad Cossebaude',
+      conditions: 'Ort zum Schwimmen',
+      category: 'Freibad',
+    },
+    geometry: {
+      type: 'Point',
+      coordinates: [13.63784, 51.08072],
+    },
+  },
+  {
+    type: 'Feature',
+    properties: {
+      name: 'Dresdner Heide (Prießnitzwasserfall)',
+      conditions: 'kühl, viel Schatten, frische Brise',
+      category: 'Grünanlage',
+    },
+    geometry: {
+      type: 'Point',
+      coordinates: [13.79518, 51.08153],
+    },
+  },
+  {
+    type: 'Feature',
+    properties: {
+      name: 'Schwimmhalle Freiberger Platz',
+      conditions: 'Ort zum Schwimmen',
+      category: 'Schwimmhalle',
+    },
+    geometry: {
+      type: 'Point',
+      coordinates: [13.72215, 51.04608],
+    },
+  },
+  {
+    type: 'Feature',
+    properties: {
+      name: 'Ostragehege / Flutrinne',
+      conditions: 'frische Brise, kühl',
+      category: 'Grünanlage',
+    },
+    geometry: {
+      type: 'Point',
+      coordinates: [13.71462, 51.06138],
     },
   },
 ]
 
-const maxShadeLabel = (
-  <div className="flex items-center">
-    <div className="w-2 h-2 bg-[#808080] rounded-full"></div>
-    <span className="ml-1">Schattig</span>
-  </div>
-)
-
-const minShadeLabel = (
-  <div className="flex items-center">
-    <div className="w-2 h-2 bg-[#F4F4F2] rounded-full"></div>
-    <span className="ml-1">Sonnig</span>
-  </div>
-)
+// Shadow labels disabled for Dresden – no bDOM data available yet.
+// const maxShadeLabel = (
+//   <div className="flex items-center">
+//     <div className="w-2 h-2 bg-[#808080] rounded-full"></div>
+//     <span className="ml-1">Schattig</span>
+//   </div>
+// )
+//
+// const minShadeLabel = (
+//   <div className="flex items-center">
+//     <div className="w-2 h-2 bg-[#F4F4F2] rounded-full"></div>
+//     <span className="ml-1">Sonnig</span>
+//   </div>
+// )
 
 export const LAYER_LEGEND_ITEMS: {
   shade: Pick<
     LayerLegendBlockType,
     'title' | 'description' | 'icon' | 'legendFigure'
-  >
+  > | null
   temperature: Pick<
     LayerLegendBlockType,
     'title' | 'description' | 'icon' | 'legendFigure'
@@ -880,21 +715,9 @@ export const LAYER_LEGEND_ITEMS: {
     'title' | 'description' | 'icon' | 'legendFigure'
   >
 } = {
-  shade: {
-    title: 'Schatten',
-    description: 'Zeigt, wohin die Schatten fallen.',
-    icon: <ShadeIcon />,
-    legendFigure: (
-      <LayerLegendFigure maxLabel={maxShadeLabel} minLabel={minShadeLabel}>
-        <Image
-          src={shadeImage}
-          alt="Beispiel von Schatten auf der Karte"
-          width={400}
-          height={30}
-        />
-      </LayerLegendFigure>
-    ),
-  },
+  // Shadow legend disabled for Dresden – no bDOM data available yet.
+  // Kept in code for future implementation.
+  shade: null,
   temperature: {
     title: 'Kühle Bereiche',
     description: 'Zeigt die vergleichsweise kühlsten Bereiche in der Stadt.',

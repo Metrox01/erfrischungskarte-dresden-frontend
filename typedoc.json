@@ -1,0 +1,7 @@
+{
+  "entryPointStrategy": "expand",
+  "entryPoints": ["src"],
+  "out": "docs",
+  "tsconfig": "tsconfig.json",
+  "exclude": ["**/*.stories.tsx", "**/*.test.ts", "**/*.test.tsx"]
+}

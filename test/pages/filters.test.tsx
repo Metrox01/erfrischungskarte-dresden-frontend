@@ -35,7 +35,10 @@ describe('Filters page', () => {
     expect(supportNote).not.toBeInTheDocument()
   })
 
-  it('displays a note if webp is not supported', () => {
+  // Der Schatten-Layer ist in der Dresdner Adaption deaktiviert
+  // (LAYER_LEGEND_ITEMS.shade === null, mangels bDOM-Daten), daher kann der
+  // WebP-Hinweis nicht rendern. Reaktivieren, sobald Schattendaten vorliegen.
+  it.skip('displays a note if webp is not supported', () => {
     useHasWebPSupport.mockReturnValue(false)
     useRouter.mockReturnValue({
       query: {},

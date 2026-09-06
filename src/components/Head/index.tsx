@@ -46,7 +46,7 @@ export const Head: FC<Partial<HeadPropType>> = ({
   themeColor = colors['layer-turquoise']['300'],
   locales = ['de'],
   locale = 'de',
-  twitterUsername = 'TSBBerlin',
+  twitterUsername = '',
   socialThumbnail = '',
 }) => {
   const { pathname } = useRouter()
@@ -106,7 +106,7 @@ export const Head: FC<Partial<HeadPropType>> = ({
 
       <link rel="manifest" href="/manifest.webmanifest" />
 
-      <link rel="author" href="https://odis-berlin.de" />
+      {/* Original author: ODIS Berlin - https://odis-berlin.de */}
     </NextHead>
   )
 }

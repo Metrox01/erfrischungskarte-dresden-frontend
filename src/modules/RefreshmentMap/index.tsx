@@ -10,10 +10,11 @@ import {
   TEMPERATURE_DATA,
   WIND_DATA,
   POI_DATA,
-  HourType,
+  // HourType, // Shadow layer disabled for Dresden
   POI_CATEGORY_ID_MAP,
 } from './content'
-import { MapRasterLayer as RasterLayer } from '../../components/MapRasterLayer'
+// Shadow layer disabled for Dresden
+// import { MapRasterLayer as RasterLayer } from '../../components/MapRasterLayer'
 import { MapExtrusionLayer as ExtrusionLayer } from '../../components/MapExtrusionLayer'
 import { MapPointLayer } from '@components/MapPointLayer'
 import { HourSelector } from '@components/HourSelector'
@@ -26,7 +27,7 @@ import {
 import { MapEvent } from 'react-map-gl'
 import { mapRawQueryToState, PageQueryType } from '@lib/utils/queryUtil'
 import { AppTitle } from '@components/AppTitle'
-import { useHasWebPSupport } from '@lib/hooks/useHasWebPSupport'
+// import { useHasWebPSupport } from '@lib/hooks/useHasWebPSupport' // Shadow layer disabled
 import { SharingOverlay } from '@components/SharingOverlay'
 import { WeatherOverlay } from '@components/WeatherOverlay'
 import { useCurrentTime } from '@lib/hooks/useCurrentTime'
@@ -79,7 +80,7 @@ export const MAP_STYLE_URL =
 
 export const RefreshmentMap: FC<RefreshmentMapPropType> = (pageProps) => {
   const hasMobileSize = useHasMobileSize()
-  const hasWebPSupport = useHasWebPSupport()
+  // const hasWebPSupport = useHasWebPSupport() // Shadow layer disabled for Dresden
   const currentTime = useCurrentTime()
 
   const { pathname, query } = useRouter()
@@ -89,7 +90,7 @@ export const RefreshmentMap: FC<RefreshmentMapPropType> = (pageProps) => {
     mappedQuery.visibleHour || currentTime
   }` as keyof typeof HOURS
 
-  const hourKeys = Object.keys(HOURS) as HourType[]
+  // const hourKeys = Object.keys(HOURS) as HourType[] // Shadow layer disabled for Dresden
   const [poiTooltipContent, setPoiTooltipContent] = useState<Pick<
     MapPoiTooltipType,
     'title' | 'category' | 'info' | 'address'
@@ -183,6 +184,8 @@ export const RefreshmentMap: FC<RefreshmentMapPropType> = (pageProps) => {
           fillColorProperty="desk3"
           isVisible={mappedQuery.showTemperature !== false}
         />
+        {/* Shadow layer disabled for Dresden – no bDOM data available yet.
+           Kept in code for future implementation.
         {hasWebPSupport &&
           hourKeys.map((key) => (
             <RasterLayer
@@ -196,6 +199,7 @@ export const RefreshmentMap: FC<RefreshmentMapPropType> = (pageProps) => {
               beforeId={EXTRUDED_BUILDINGS_DATA.id}
             />
           ))}
+        */}
         <ExtrusionLayer {...EXTRUDED_BUILDINGS_DATA} minzoom={15.5} />
         <MapPointLayer
           {...POI_DATA}

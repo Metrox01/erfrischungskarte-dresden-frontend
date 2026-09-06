@@ -1,122 +1,90 @@
-![](https://img.shields.io/badge/Built%20with%20%E2%9D%A4%EF%B8%8F-at%20Technologiestiftung%20Berlin-blue)
+# _Dresdner Erfrischungskarte_
 
-# _Berliner Erfrischungskarte_
-> The [_Berliner Erfrischungskarte_](https://erfrischungskarte.odis-berlin.de) (Berlin refreshment map) is an interactive map of Berlin that shows shadows, cold wind areas and temperature intensities across a typical summer day.
+> Die Dresdner Erfrischungskarte ist eine interaktive Karte von Dresden, die Temperaturintensitäten, Kaltluftbereiche und erfrischende Orte (POIs) an einem typischen Sommertag zeigt. Sie basiert auf der [Berliner Erfrischungskarte](https://github.com/technologiestiftung/erfrischungskarte-frontend) der Technologiestiftung Berlin.
 
-## Context
-Climate change is causing increasingly hot, dry weather in many places. In recent years, Berlin has also experienced more hot days than ever before.
-This map shows you where, when and how you can find refreshment on such days, because due to the differentiated topography there can be considerable differences within the city. For each hour from 10 a.m. to 9 p.m., it shows you where it tends to be cool, where a fresh breeze usually blows and where there is shade. Also discover refreshing places like swimming spots, drinking fountains and parks. With one click via the share function, you can share your new favorite place with others.
+## Kontext
 
-This application is completely based on open data, much of which is administrative data. Open data is now an important part of Berlin's administrative activities and not only creates transparency and openness, but also enables analysis and applications like this to make everyday life a little bit more pleasant. You can find more open data at the [Berlin Open Data Portal](https://daten.berlin.de/).
+Der Klimawandel sorgt an vielen Orten für zunehmend heißes, trockenes Wetter. Auch in Dresden hat die Zahl der Hitzetage in den letzten Jahren zugenommen.
+Diese Karte zeigt dir, wo und wie du an solchen Tagen Erfrischung finden kannst. Sie zeigt Bereiche mit unterschiedlicher Wärmebelastung, Gebiete mit kühlendem Wind sowie erfrischende Orte wie Freibäder, Schwimmhallen, Trinkbrunnen, Parkanlagen und mehr.
 
-## Tech stack
-This website is a NextJS app configured with:
+Diese Anwendung basiert vollständig auf offenen Daten, die größtenteils aus dem [Open-Data-Portal der Stadt Dresden](https://opendata.dresden.de/) stammen.
 
-- [Typescript](https://www.typescriptlang.org/)
-- Linting with [ESLint](https://eslint.org/)
-- Formatting with [Prettier](https://prettier.io/)
-- Linting, typechecking and formatting on by default using [`husky`](https://github.com/typicode/husky) for commit hooks
-- Testing with [Jest](https://jestjs.io/) and [`react-testing-library`](https://testing-library.com/docs/react-testing-library/intro)
+## Adaption vom Berliner Original
 
-## Data
-This repository contains the **frontend** code of the _Berliner Erfrischungskarte_ app. The **data** and the data processing scripts are contained in another repository: [erfrischungskarte-daten](https://github.com/technologiestiftung/erfrischungskarte-daten). There you can also find further information about the original data sources.
+Dieses Projekt ist ein Fork der [Berliner Erfrischungskarte](https://github.com/technologiestiftung/erfrischungskarte-frontend), entwickelt von ODIS / Technologiestiftung Berlin. Die Adaption für Dresden umfasst:
 
-## Install and contribute
+- **Kartenzentrum und Bounding-Box**: Von Berlin auf Dresden verschoben
+- **Temperaturdaten**: Wärmebelastungskategorien der Stadt Dresden (qualitativ statt quantitativ)
+- **Winddaten**: Mittlere Windgeschwindigkeiten mit Step-basierter Farbzuordnung
+- **Schattendaten**: Im UI deaktiviert (keine bDOM-Daten für Dresden verfügbar), Code erhalten
+- **POIs**: Eigenes ETL-Script mit 9 Dresdner Datenquellen (Toiletten, Freibäder, Schwimmhallen, Wassersportstätten, Parkanlagen, Refill-Stationen, Trinkbrunnen)
+- **Suchvorschläge**: 12 Dresdner Orte mit exakten Koordinaten
+- **Alle UI-Texte**: Für Dresden angepasst
 
-### Requirements
+### Neue Features (nicht im Berliner Original)
+
+- **Rechtsklick-Kontextmenü**: "In Google Maps öffnen" per Rechtsklick auf die Karte, mit automatischer POI-Erkennung
+- **Verbesserte Suchfokussierung**: Zuverlässige Kartenzentrierung beim Klick auf Suchergebnisse
+
+## Tech Stack
+
+Diese Website ist eine NextJS-App konfiguriert mit:
+
+- [TypeScript](https://www.typescriptlang.org/)
+- [React](https://reactjs.org/) (v17) mit [react-map-gl](https://visgl.github.io/react-map-gl/) (v6)
+- [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js/) für Kartenvisualisierung
+- Linting mit [ESLint](https://eslint.org/)
+- Formatierung mit [Prettier](https://prettier.io/)
+- Testing mit [Jest](https://jestjs.io/) und [react-testing-library](https://testing-library.com/docs/react-testing-library/intro)
+
+## Daten
+
+Dieses Repository enthält den **Frontend-Code** der Dresdner Erfrischungskarte. Die **Daten** und Datenverarbeitungsscripts befinden sich in einem separaten Repository: [erfrischungskarte-dresden-daten](../erfrischungskarte-dresden-daten/).
+
+Datenquellen für Dresden:
+- Wärmebelastungsdaten (Open-Data-Portal Dresden)
+- Windgeschwindigkeitsdaten (Open-Data-Portal Dresden)
+- POIs: Barrierefreie WCs, Nette Toiletten, öffentliche Toiletten, Freibäder, Schwimmhallen, Wassersportstätten, Parkanlagen, Refill-Stationen, Trinkbrunnen
+
+## Installation
+
+### Voraussetzungen
 
 #### [Mapbox](https://www.mapbox.com/)
-You will need a [Mapbox](https://www.mapbox.com/) account to render the map locally. You will need to put your [Mapbox](https://www.mapbox.com/) access token into the `NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN` environment variable. Make also sure to add whatever URL the app is run on to the list of allowed URLs in your [Mapbox](https://www.mapbox.com/) configuration.
+Du benötigst einen [Mapbox](https://www.mapbox.com/)-Account, um die Karte lokal zu rendern. Trage deinen Mapbox-Access-Token in die Umgebungsvariable `NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN` ein.
 
-#### [Matomo](https://matomo.org/)
-We use the Google Analytics alternative [Matomo](https://matomo.org/), which is more respectful of the users' privacy, in order to track the page-visits on the page.
-
-You will need a [Matomo](https://matomo.org/) account if you wish to use page analytics as well and configure the environment variables `NEXT_PUBLIC_MATOMO_URL` and `NEXT_PUBLIC_MATOMO_SITE_ID` for this purpose.
-
-### Installation
+### Setup
 
 ```bash
-# Clone the repo
-git clone git@github.com:technologiestiftung/erfrischungskarte-frontend.git
+# Repository klonen
+git clone <repo-url>
 
-# Move into the repo
-cd erfrischungskarte-frontend
+# In das Verzeichnis wechseln
+cd erfrischungskarte-dresden
 
-# Install the npm dependencies
+# npm-Abhängigkeiten installieren
 npm install
 
-# Create your own .env file
+# Eigene .env-Datei erstellen
 cp .env.example .env
 
-# Edit the .env file with your own values
-vim .env # Use your favourite editor here
+# .env-Datei mit eigenen Werten bearbeiten
+vim .env
 
-# To start developing use
+# Entwicklungsserver starten
 npm run dev
 ```
 
-## Deployment
-_Berliner Erfrischungskarte_ is deployed to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
-
-## Contributors
-
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tr>
-    <td align="center"><a href="https://github.com/dnsos"><img src="https://avatars.githubusercontent.com/u/15640196?v=4?s=64" width="64px;" alt=""/><br /><sub><b>Dennis Ostendorf</b></sub></a><br /><a href="https://github.com/technologiestiftung/erfrischungskarte-frontend/commits?author=dnsos" title="Code">💻</a> <a href="https://github.com/technologiestiftung/erfrischungskarte-frontend/commits?author=dnsos" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://github.com/Lisa-Stubert"><img src="https://avatars.githubusercontent.com/u/61182572?v=4?s=64" width="64px;" alt=""/><br /><sub><b>Lisa-Stubert</b></sub></a><br /><a href="https://github.com/technologiestiftung/erfrischungskarte-frontend/commits?author=Lisa-Stubert" title="Code">💻</a> <a href="#data-Lisa-Stubert" title="Data">🔣</a></td>
-    <td align="center"><a href="https://vogelino.com/"><img src="https://avatars.githubusercontent.com/u/2759340?v=4?s=64" width="64px;" alt=""/><br /><sub><b>Lucas Vogel</b></sub></a><br /><a href="https://github.com/technologiestiftung/erfrischungskarte-frontend/commits?author=vogelino" title="Code">💻</a> <a href="https://github.com/technologiestiftung/erfrischungskarte-frontend/commits?author=vogelino" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://github.com/lucasoeth"><img src="https://avatars.githubusercontent.com/u/43838158?v=4?s=64" width="64px;" alt=""/><br /><sub><b>lucasoeth</b></sub></a><br /><a href="https://github.com/technologiestiftung/erfrischungskarte-frontend/commits?author=lucasoeth" title="Code">💻</a></td>
-  </tr>
-</table>
-
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
-
-
-## Content Licencing
-
-Texts and content available as [CC BY](https://creativecommons.org/licenses/by/3.0/de/). 
-
 ## Credits
 
-<table>
-  <tr>
-    <td>
-      <a href="https://odis-berlin.de">
-        <br />
-        <br />
-        <img width="200" src="https://logos.citylab-berlin.org/logo-odis-berlin.svg" />
-      </a>
-    </td>
-    <td>
-      Together with: <a href="https://citylab-berlin.org/en/start/">
-        <br />
-        <br />
-        <img width="200" src="https://logos.citylab-berlin.org/logo-citylab-berlin.svg" />
-      </a>
-    </td>
-    <td>
-      A project by: <a href="https://www.technologiestiftung-berlin.de/en/">
-        <br />
-        <br />
-        <img width="150" src="https://logos.citylab-berlin.org/logo-technologiestiftung-berlin-en.svg" />
-      </a>
-    </td>
-    <td>
-      Supported by: <a href="https://www.berlin.de/sen/inneres/">
-        <br />
-        <br />
-        <img width="100" src="https://logos.citylab-berlin.org/logo-berlin-seninnds-en.svg" />
-      </a>
-    </td>
-  </tr>
-</table>
+Dieses Projekt basiert auf der [Berliner Erfrischungskarte](https://github.com/technologiestiftung/erfrischungskarte-frontend), entwickelt von:
+
+- [ODIS (Open Data Informationsstelle Berlin)](https://odis-berlin.de)
+- [CityLAB Berlin](https://citylab-berlin.org)
+- [Technologiestiftung Berlin](https://www.technologiestiftung-berlin.de)
+
+Adaption für Dresden im Rahmen einer Belegarbeit an der TU Dresden.
+
+## Lizenz
+
+Texte und Inhalte verfügbar als [CC BY](https://creativecommons.org/licenses/by/3.0/de/).

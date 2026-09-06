@@ -3,8 +3,6 @@ import { InternalLink } from '@components/InternalLink'
 import { CrossIcon, SunIcon } from '@components/Icons'
 import classNames from 'classnames'
 import { useHasMobileSize } from '@lib/hooks/useHasMobileSize'
-import { CitylabLogo } from '@components/CitylabLogo'
-import { OdisLogo } from '@components/OdisLogo'
 
 export const SplashScreen: FC = () => {
   const hasMobileSize = useHasMobileSize()
@@ -28,13 +26,21 @@ export const SplashScreen: FC = () => {
           </div>
         </div>
         <p className="mt-4 md:mr-12 text-gray-500">
-          Die Berliner Erfrischungskarte zeigt
-          <b className="text-layer-blue-300"> kühle</b>,
-          <b className="text-layer-green-300"> windige</b> und
-          <b className="text-gray-800"> schattige</b> Flächen in der Stadt, und
-          zeigt auf, welche Orte anhand ihrer natürlichen Eigenschaften oder
-          ihrer Infrastruktur (Sitzbänke, Trinkbrunnen, usw.) besonders zum
-          Erfrischen und Verweilen im Sommer geeignet sind.
+          Die Dresdner Erfrischungskarte zeigt
+          <b className="text-layer-blue-300"> kühle</b> und
+          <b className="text-layer-green-300"> windige</b> Bereiche in der
+          Stadt, und zeigt auf, welche Orte anhand ihrer natürlichen
+          Eigenschaften oder ihrer Infrastruktur (Trinkbrunnen, Freibäder,
+          Parkanlagen u.v.m.) besonders zum Erfrischen und Verweilen im Sommer
+          geeignet sind. Basierend auf der{' '}
+          <a
+            target="blank"
+            href="https://github.com/technologiestiftung/erfrischungskarte-frontend"
+            className="text-gray-700 underline"
+          >
+            Berliner Erfrischungskarte
+          </a>{' '}
+          der Technologiestiftung Berlin.
         </p>
         <div className="mt-4 md:mt-16 flex flex-wrap place-items-start">
           <InternalLink
@@ -74,17 +80,14 @@ export const SplashScreen: FC = () => {
             Mehr Infos
           </InternalLink>
         </div>
-        <div className="grid md:grid-cols-[1fr,auto] gap-4 mt-4 md:mt-6">
-          <p className="text-xs mb-2 md:mb-0 text-gray-700 max-w-md">
+        <div className="mt-4 md:mt-6">
+          <p className="text-xs text-gray-700 max-w-md">
             <i>
-              Eine prototypische Datenvisualisierung der Open Data
-              Informationsstelle Berlin in Zusammenarbeit mit dem CityLAB Berlin
+              Eine Adaption der Berliner Erfrischungskarte für Dresden.
+              Originalprojekt: Technologiestiftung Berlin / ODIS. Datenquellen:
+              Open-Data-Portal der Stadt Dresden.
             </i>
           </p>
-          <div className="inline-block md:flex">
-            <OdisLogo className="w-36 mr-4" />
-            <CitylabLogo className="w-32 mt-4 md:mt-0 self-center" />
-          </div>
         </div>
       </div>
     </div>

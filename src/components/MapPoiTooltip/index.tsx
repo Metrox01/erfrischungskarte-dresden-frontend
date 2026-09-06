@@ -16,6 +16,12 @@ export interface MapPoiTooltipType {
   }
 }
 
+/**
+    This block is there to handle the info field which can be either a string or an object.
+    If it's a string that looks like a JSON object, we try to parse it.
+    This way the info property is a lot more flexible for different categories of POIs.
+    @info can be a simple string, a JSON string, or an already parsed object. We extract all string values to display in the tooltip.
+  */
 export const MapPoiTooltip: FC<MapPoiTooltipType> = ({
   title,
   category,
@@ -23,11 +29,6 @@ export const MapPoiTooltip: FC<MapPoiTooltipType> = ({
   address,
   coordinates,
 }) => {
-  /*
-    This block is there to handle the info field which can be either a string or an object.
-    If it's a string that looks like a JSON object, we try to parse it.
-    This way the info property is a lot more flexible for different categories of POIs.
-  */
   const infoLines: string[] = []
 
   if (info) {

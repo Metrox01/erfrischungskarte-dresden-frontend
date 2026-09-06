@@ -19,12 +19,15 @@ describe('SplashScreen component', () => {
     render(<SplashScreen />)
     const links = screen.getAllByRole('link')
 
-    expect(links.length).toBe(5)
+    // 5 InternalLinks + Attributions-Link auf das Berliner Original
+    expect(links.length).toBe(6)
   })
   it('renders all the svgs', () => {
     render(<SplashScreen />)
     const svgs = document.querySelectorAll('svg')
 
-    expect(svgs.length).toBe(4)
+    // CrossIcon + SunIcon; OdisLogo und CitylabLogo entfallen in der
+    // Dresdner Adaption
+    expect(svgs.length).toBe(2)
   })
 })
