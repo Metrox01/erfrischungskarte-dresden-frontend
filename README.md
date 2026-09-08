@@ -39,7 +39,7 @@ Diese Website ist eine NextJS-App konfiguriert mit:
 
 ## Daten
 
-Dieses Repository enthält den **Frontend-Code** der Dresdner Erfrischungskarte. Die **Daten** und Datenverarbeitungsscripts befinden sich in einem separaten Repository: [erfrischungskarte-dresden-daten](../erfrischungskarte-dresden-daten/).
+Dieses Repository enthält den **Frontend-Code** der Dresdner Erfrischungskarte. Die **Daten** und Datenverarbeitungsscripts befinden sich in einem separaten Repository: [erfrischungskarte-dresden-daten](https://github.com/Metrox01/erfrischungskarte-dresden-daten/tree/dresden).
 
 Datenquellen für Dresden:
 - Wärmebelastungsdaten (Open-Data-Portal Dresden)
